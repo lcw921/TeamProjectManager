@@ -1,5 +1,6 @@
 package edu.skku.MAP.teamprojectmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,9 @@ public class Overlap extends AppCompatActivity {
     TextView[] textViews = new TextView[100];
     Integer i = 0;
     RelativeLayout container;
-    //
-    String t_name[] = new String[5];
-    Integer t_number = 2;
+    String members[];
+    Integer n;
     Integer t = 0;
-    //
     private DatabaseReference mPostReference;
     public Integer height;
     public Integer tempheight;
@@ -33,13 +32,14 @@ public class Overlap extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_overlap);
+
+        Intent intent = getIntent();
 
         mPostReference = FirebaseDatabase.getInstance().getReference();
-        //
-        t_name[0] = "table1";
-        t_name[1] = "table2";
-        //
+        members = intent.getStringArrayExtra("MEMBER_NAME");
+        n = intent.getExtras().getInt("NUMBER_OF_MEMBER");
+
         getFirebaseDatabase();
     }
 
@@ -204,8 +204,8 @@ public class Overlap extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
-        for(t = 0; t < t_number; t++){
-            mPostReference.child("table_list/" + t_name[t]).addValueEventListener(postListener);
+        for(t = 0; t < n; t++){
+            mPostReference.child("table_list/" + members[t]).addValueEventListener(postListener);
         }
     }
 }

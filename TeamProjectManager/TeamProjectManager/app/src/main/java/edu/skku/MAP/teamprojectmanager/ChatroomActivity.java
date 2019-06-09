@@ -33,13 +33,15 @@ public class ChatroomActivity extends AppCompatActivity {
     ArrayList<ChatItem> chats;
     ChatItemAdapter chatAdapter;
     Context context;
-    Button btn;
+    Button btn, member, table;
     String userNAME;
     String roomID;
     String from;
     String contents;
     String time;
     EditText message;
+    Integer n;
+    String[] members = new String[100];
     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 
@@ -62,6 +64,8 @@ public class ChatroomActivity extends AppCompatActivity {
         getFirebaseDatabase();
 
         message = ChatroomActivity.this.findViewById(R.id.MESSAGE);
+        member = (Button) findViewById(R.id.MEMBER);
+        table = (Button) findViewById(R.id.TIMETABLE);
         btn = ChatroomActivity.this.findViewById(R.id.SEND);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +82,23 @@ public class ChatroomActivity extends AppCompatActivity {
                     postFirebaseDatabase(true);
                     from = userNAME;
                 }
+            }
+        });
+        //
+        member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //
+        table.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent time = new Intent(ChatroomActivity.this, Overlap.class);
+                time.putExtra("NUMBER_OF_MEMBER", n);
+                time.putExtra("MEMBER_NAME", members);
+                startActivity(time);
             }
         });
     }
