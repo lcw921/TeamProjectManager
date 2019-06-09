@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "345265018099",
+    "firebase_url": "https://teamprojectmanager-b2430.firebaseio.com",
+    "project_id": "teamprojectmanager-b2430",
+    "storage_bucket": "teamprojectmanager-b2430.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345265018099:android:3e657237f972a814",
+        "android_client_info": {
+          "package_name": "edu.skku.MAP.teamprojectmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345265018099-s1c2ld0hrtrnbm1h8erfs4d85ev3hckm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpVo4hfaR9QjKPsmHlYSG0LvpGbNGLI5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345265018099-s1c2ld0hrtrnbm1h8erfs4d85ev3hckm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
