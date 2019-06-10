@@ -154,11 +154,11 @@ public class JoinActivity extends AppCompatActivity {
     private void postFirebaseDatabase(boolean add){
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
+        String[] tmpID = EMAIL.split("@");
         if(add){
-            UserPost post = new UserPost(EMAIL, ID, NAME);
+            UserPost post = new UserPost(EMAIL, ID, NAME, tmpID[0]);
             postValues = post.toMap();
         }
-        String[] tmpID = EMAIL.split("@");
         childUpdates.put("/UserList/" + tmpID[0], postValues);
         mPostReference.updateChildren(childUpdates);
     }

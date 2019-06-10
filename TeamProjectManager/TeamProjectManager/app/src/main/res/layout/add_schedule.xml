@@ -17,7 +17,7 @@
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="Add Project"
+        android:text="Add Schedule"
         android:textColor="#FFFFFF"
         android:textSize="20dp" />
 
@@ -35,23 +35,48 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/PROJECTNAME"
+                android:id="@+id/SCHEDULENAME"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:gravity="center"
-                android:text="프로젝트명"
+                android:text="일정명"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editPROJECTNAME"
+                android:id="@+id/editSCHEDULENAME"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="프로젝트명을 입력하세요"
+                android:hint="일정명을 입력하세요"
                 android:inputType="textPersonName" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/DAY"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="요일"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/SELECT_DAY"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="0" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -60,13 +85,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/PERIOD"
+                android:id="@+id/TIME"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="프로젝트\n기간"
+                android:text="일정\n시간"
                 android:textSize="15dp"
                 android:textStyle="bold" />
 
@@ -83,7 +108,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/PERIOD_FROM"
+                        android:id="@+id/TIME_FROM"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -92,7 +117,7 @@
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/PERIOD_TO"
+                        android:id="@+id/TIME_TO"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -126,55 +151,13 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/PARTICIPANTS"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="프로젝트\n참여자"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/PARTICIPANTS_SELECT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="참여인원을 선택하세요" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/contents"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/CLOSE"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Close" />
-
-        <Button
-            android:id="@+id/ADD"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="ADD" />
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
 
 </RelativeLayout>

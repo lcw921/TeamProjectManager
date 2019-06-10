@@ -20,12 +20,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyD3mvr3YlSgWQpy1N-_dDlaFB7FOM9BLFA">
         </meta-data>
-
+        <activity android:name=".SelectFriendActivity"></activity>
         <activity android:name=".TimeActivity"></activity>
         <activity
             android:name=".AddProjectActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".Overlap" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

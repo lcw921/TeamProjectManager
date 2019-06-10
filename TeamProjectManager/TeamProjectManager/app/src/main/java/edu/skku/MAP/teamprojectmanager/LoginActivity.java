@@ -126,6 +126,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                            typeEMAIL.setText("");
+                            typePW.setText("");
                             Intent intent= new Intent(LoginActivity.this, MainActivity.class);
                             MyApplication MyApp = (MyApplication)context;
                             String[] tmpID = EMAIL.split("@");
@@ -138,8 +140,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 
     public void getUserInfo(String tmpID) {
         final ValueEventListener postListener = new ValueEventListener() {

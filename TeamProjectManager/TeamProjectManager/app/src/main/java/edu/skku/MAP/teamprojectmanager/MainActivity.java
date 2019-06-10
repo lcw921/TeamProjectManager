@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
     Button Search;
     EditText findUserIDET;
     String findUserID;
+    String findUserNAME;
+    String findUserTMPID;
+
     Integer check = 0;
+    Integer myID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +91,15 @@ public class MainActivity extends AppCompatActivity {
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                myID=0;
                 findUserID = findUserIDET.getText().toString();
-
                 readData(new FirebaseCallback() {
                     @Override
                     public void onCallback(Integer c) {
                         Log.d("check5", "key: " + c.toString());
-                        if (findUserID.length() == 0) {
+                        if(myID==1){
+                            Toast.makeText(MainActivity.this, "본인의 아이디입니다.", Toast.LENGTH_SHORT).show();
+                        } else if (findUserID.length() == 0) {
                         } else if ((findUserID.length() != 0) && (c ==0)){
                             Toast.makeText(MainActivity.this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show();
                         } else if ((findUserID.length() != 0) && (c ==1)){
@@ -142,11 +147,12 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> postValues = null;
         HashMap<String, Object> result = new HashMap<>();
         if(add){
-            FriendsItem post = new FriendsItem(findUserID);
-            result.put("NAME", findUserID);
+            result.put("NAME", findUserNAME);
+            result.put("ID", findUserID);
+            result.put("TMPID", findUserTMPID);
             postValues = result;
         }
-        childUpdates.put("/UserList/" + userFindID + "/FRIENDS/"+findUserID, postValues);
+        childUpdates.put("/UserList/" + userFindID + "/FRIENDS/"+findUserNAME, postValues);
         mPostReference.updateChildren(childUpdates);
         clearET();
     }
@@ -166,9 +172,12 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     UserPost get = postSnapshot.getValue(UserPost.class);
-                    String[] info = {get.ID};
-                    String result = info[0] ;
-                    if(findUserID.equals(get.ID)){
+                    if(findUserID.equals(MyApp.getUserID())){
+                        myID=1;
+                    }
+                    else if(findUserID.equals(get.ID)){
+                        findUserTMPID = postSnapshot.getKey();
+                        findUserNAME = get.NAME;
                         check++;
                     }
                 }

@@ -18,22 +18,20 @@
 
             <TextView
                 android:id="@+id/textView"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 android:layout_weight="1"
-                android:text="Table Name" />
+                android:text="시간표" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/ADD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="할 일 추가" />
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="시간표 관리" />
         </LinearLayout>
 
         <ScrollView

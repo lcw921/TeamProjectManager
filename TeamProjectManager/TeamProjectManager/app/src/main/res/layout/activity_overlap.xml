@@ -20,6 +20,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
                 android:text="Available Time"
                 android:textSize="30dp"/>
 

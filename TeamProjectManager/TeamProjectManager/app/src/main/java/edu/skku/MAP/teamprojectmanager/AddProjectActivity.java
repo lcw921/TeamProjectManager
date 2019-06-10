@@ -4,11 +4,8 @@ import android.app.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -20,7 +17,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,20 +27,22 @@ public class AddProjectActivity extends Activity {
     private DatabaseReference mPostReference;
     private MyApplication MyApp;
     Context context;
+    Intent intent;
 
     Button Close;
     Button AddProject;
     Button From, To;
+    Button AddFriend;
     TextView selectedFrom, selectedTo;
     String period_from, period_to;
     int from_year, from_month, from_day;
     int to_year, to_month, to_day;
-    Button Participants;
     EditText ProjectNameET;
     String ProjectName;
     String userSEARCHID;
-    SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
-    String TAG = "AddProjectActivity";
+    ArrayList<String> participants;
+    ArrayList<String> participantsNAME;
+    int total_participants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +62,15 @@ public class AddProjectActivity extends Activity {
 
         final Calendar cal = Calendar.getInstance();
 
-        Log.e(TAG, cal.get(Calendar.YEAR)+"");
-        Log.e(TAG, cal.get(Calendar.MONTH)+1+"");
-        Log.e(TAG, cal.get(Calendar.DATE)+"");
-        Log.e(TAG, cal.get(Calendar.HOUR_OF_DAY)+"");
-        Log.e(TAG, cal.get(Calendar.MINUTE)+"");
+
+        AddFriend = AddProjectActivity.this.findViewById(R.id.PARTICIPANTS_SELECT);
+        AddFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(AddProjectActivity.this, SelectFriendActivity.class);
+                startActivityForResult(intent, 3000);
+            }
+        });
 
         From = AddProjectActivity.this.findViewById(R.id.SELECT_FROM);
         From.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +92,6 @@ public class AddProjectActivity extends Activity {
                 dialog.show();
             }
         });
-
 
         To = AddProjectActivity.this.findViewById(R.id.SELECT_TO);
         To.setOnClickListener(new View.OnClickListener() {
@@ -149,28 +151,91 @@ public class AddProjectActivity extends Activity {
         });
     }
 
-    public void addProject(){
-        if(ProjectName.length()==0){
-            Toast.makeText(getApplicationContext(),"모든 정보를 입력해주세요",Toast.LENGTH_LONG).show();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 3000) {
+            if(resultCode==RESULT_OK) {
+                Bundle MBuddle = data.getExtras();
+                participants = MBuddle.getStringArrayList("participants"); //추가한 친구 리스트 받아옴
+                participantsNAME = MBuddle.getStringArrayList("participantsNAME"); //추가한 친구 리스트 받아옴
+                if(participants==null){
+                    Toast.makeText(AddProjectActivity.this, "추가할 친구 정보를 받아올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(AddProjectActivity.this, "총 " + participants.size()+"명을 추가하셨습니다.", Toast.LENGTH_SHORT).show();
+                    total_participants = participants.size();
+                }
+            }
+            else{
+                Toast.makeText(AddProjectActivity.this, "추가할 친구 정보를 받아올 수 없습니다.", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
-            postFirebaseDatabase(true);
-            finish();
+            Toast.makeText(AddProjectActivity.this, "추가할 친구 정보를 받아올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void postFirebaseDatabase(boolean add){
+    public void addProject(){
+        if(ProjectName.length()==0 || period_from.length()==0 || period_to.length()==0 || total_participants==0){
+            Toast.makeText(getApplicationContext(),"모든 정보를 입력해주세요",Toast.LENGTH_LONG).show();
+        }
+        else{
+            for(int i=0;i<total_participants;i++) {
+                postProjectFirebaseDatabase(true, participants.get(i));
+                for(int j=0;j<total_participants;j++){
+                    postParticipantsFirebaseDatabase(true, participants.get(i), participants.get(j));
+                }
+            }
+            postChatroomFirebaseDatabase(true);
+        }
+
+    }
+
+    public void postProjectFirebaseDatabase(boolean add, String ID){
         Map<String, Object> childUpdates = new HashMap<>();
         Map<String, Object> postValues = null;
         if(add){
             ChatListItemPost post = new ChatListItemPost(ProjectName, period_from, period_to);
             postValues = post.toMap();
         }
-        childUpdates.put("/UserList/" + userSEARCHID + "/PROJECTS/" + ProjectName, postValues);
+        childUpdates.put("/UserList/" + ID + "/PROJECTS/" + ProjectName, postValues);
+        mPostReference.updateChildren(childUpdates);
+    }
+
+    public void postParticipantsFirebaseDatabase(boolean add, String Owner, String Party){
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        HashMap<String, Object> result = new HashMap<>();
+        if(add){
+            result.put("TMPID", Party);
+            postValues = result;
+        }
+        childUpdates.put("/UserList/" + Owner + "/PROJECTS/" + ProjectName+"/PARTICIPANTS/"+Party, postValues);
+        mPostReference.updateChildren(childUpdates);
+    }
+
+
+    public void postChatroomFirebaseDatabase(boolean add){
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        HashMap<String, Object> result = new HashMap<>();
+        if(add){
+            for(int i=0;i<total_participants;i++) {
+                result.put(participantsNAME.get(i), participantsNAME.get(i));
+            }
+            postValues = result;
+        }
+        childUpdates.put("/ChatRoomList/" + ProjectName+"/Participants", postValues);
         mPostReference.updateChildren(childUpdates);
         clearET();
     }
+
     public void clearET () {
         ProjectNameET.setText("");
+        selectedFrom.setText("");
+        selectedTo.setText("");
+        participants = new ArrayList<String>();
     }
+
 }

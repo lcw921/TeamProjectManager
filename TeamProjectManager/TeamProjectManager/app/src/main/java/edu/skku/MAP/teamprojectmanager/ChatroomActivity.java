@@ -28,8 +28,7 @@ import java.util.Map;
 public class ChatroomActivity extends AppCompatActivity {
 
     private DatabaseReference mPostReference;
-    private MyApplication MyApp;
-    ListView listView;
+    private MyApplication MyApp;    ListView listView;
     ArrayList<ChatItem> chats;
     ChatItemAdapter chatAdapter;
     Context context;
@@ -43,7 +42,7 @@ public class ChatroomActivity extends AppCompatActivity {
     Integer n;
     String[] members = new String[100];
     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    LocationItem locationItem = new LocationItem("default", "0.0", "0.0");
+
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -159,4 +158,5 @@ public class ChatroomActivity extends AppCompatActivity {
         contents = "";
         time="";
     }
+
 }
