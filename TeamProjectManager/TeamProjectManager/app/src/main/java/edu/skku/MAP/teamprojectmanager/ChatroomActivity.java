@@ -43,7 +43,7 @@ public class ChatroomActivity extends AppCompatActivity {
     Integer n;
     String[] members = new String[100];
     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
+    LocationItem locationItem = new LocationItem("default", "0.0", "0.0");
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -99,6 +99,7 @@ public class ChatroomActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent pinent = new Intent(ChatroomActivity.this, LocationActivity.class);
+                pinent.putExtra("roomID", roomID);
                 startActivity(pinent);
             }
         });
@@ -158,5 +159,4 @@ public class ChatroomActivity extends AppCompatActivity {
         contents = "";
         time="";
     }
-
 }
