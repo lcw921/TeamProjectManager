@@ -3,6 +3,7 @@ package edu.skku.MAP.teamprojectmanager;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.lang.UCharacterEnums;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Button Search;
     EditText findUserIDET;
     String findUserID;
+    Integer check = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +89,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 findUserID = findUserIDET.getText().toString();
-                if (findUserID.length() == 0) {
-                    Toast.makeText(MainActivity.this, "친구의 ID를 입력해주세요", Toast.LENGTH_SHORT).show();
-                } else {
-                    postFirebaseDatabase(true);
-                }
+
+                readData(new FirebaseCallback() {
+                    @Override
+                    public void onCallback(Integer c) {
+                        Log.d("check5", "key: " + c.toString());
+                        if (findUserID.length() == 0) {
+                        } else if ((findUserID.length() != 0) && (c ==0)){
+                            Toast.makeText(MainActivity.this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show();
+                        } else if ((findUserID.length() != 0) && (c ==1)){
+                            postFirebaseDatabase(true);
+                        }
+                    }
+                });
             }
         });
 
@@ -113,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
                     String result = info[0] ;
                     friends.add(get);
                     Log.d("getFirebaseDatabase", "key: " + key);
+                    Log.d("getFirebaseDatabase", "itermid");
                     Log.d("getFirebaseDatabase", "info: " + info[0]);
+                    Log.d("getFirebaseDatabase", "iterend");
                 }
                 adapter = new FriendsAdapter(MainActivity.this, friends);
                 listView.setAdapter(adapter);
@@ -142,5 +154,34 @@ public class MainActivity extends AppCompatActivity {
     public void clearET () {
         findUserIDET.setText("");
         findUserID = "";
+    }
+
+    private void readData(final FirebaseCallback firebaseCallback){
+        check = 0;
+        Log.d("check1", "key: " + check.toString());
+        final ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("onDataChange", "Data is Updated");
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String key = postSnapshot.getKey();
+                    UserPost get = postSnapshot.getValue(UserPost.class);
+                    String[] info = {get.ID};
+                    String result = info[0] ;
+                    if(findUserID.equals(get.ID)){
+                        check++;
+                    }
+                }
+                firebaseCallback.onCallback(check);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        };
+        mPostReference.child("UserList").addValueEventListener(postListener);
+    }
+
+    private interface FirebaseCallback{
+        void onCallback(Integer c);
     }
 }
