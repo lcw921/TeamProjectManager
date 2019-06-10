@@ -23,26 +23,33 @@
             android:orientation="horizontal">
 
 
-            <TextView
-                android:id="@+id/textView2"
+            <Button
+                android:id="@+id/ROLE"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="" />
+                android:layout_weight="1"
+                android:text="DIVIDE ROLE" />
 
             <Button
-                android:id="@+id/MEMBER"
+                android:id="@+id/PLACE"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="ADD MEMBER" />
+                android:text="SET PLACE" />
 
             <Button
                 android:id="@+id/TIMETABLE"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="CHECK TIME" />
+                android:text="GET TIME" />
+
+            <Button
+                android:id="@+id/MEMBER"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="ADD MEMBER" />
 
         </LinearLayout>
 

@@ -33,7 +33,7 @@ public class ChatroomActivity extends AppCompatActivity {
     ArrayList<ChatItem> chats;
     ChatItemAdapter chatAdapter;
     Context context;
-    Button btn, member, table;
+    Button btn, member, table, place, role;
     String userNAME;
     String roomID;
     String from;
@@ -66,6 +66,9 @@ public class ChatroomActivity extends AppCompatActivity {
         message = ChatroomActivity.this.findViewById(R.id.MESSAGE);
         member = (Button) findViewById(R.id.MEMBER);
         table = (Button) findViewById(R.id.TIMETABLE);
+        place = (Button) findViewById(R.id.PLACE);
+        role = (Button) findViewById(R.id.ROLE) ;
+
         btn = ChatroomActivity.this.findViewById(R.id.SEND);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,14 +87,22 @@ public class ChatroomActivity extends AppCompatActivity {
                 }
             }
         });
-        //
+
         member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-        //
+
+        place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pinent = new Intent(ChatroomActivity.this, LocationActivity.class);
+                startActivity(pinent);
+            }
+        });
+
         table.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +112,8 @@ public class ChatroomActivity extends AppCompatActivity {
                 startActivity(time);
             }
         });
+
+
     }
     public void getFirebaseDatabase() {
         final ValueEventListener postListener = new ValueEventListener() {

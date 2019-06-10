@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.skku.MAP.teamprojectmanager">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -10,6 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD3mvr3YlSgWQpy1N-_dDlaFB7FOM9BLFA">
+        </meta-data>
+
         <activity android:name=".TimeActivity"></activity>
         <activity
             android:name=".AddProjectActivity"
@@ -25,6 +36,7 @@
         <activity android:name=".ChatListActivity" />
         <activity android:name=".ChatroomActivity" />
         <activity android:name=".JoinActivity" />
+        <activity android:name=".LocationActivity" />
     </application>
 
 </manifest>
