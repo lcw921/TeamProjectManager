@@ -127,14 +127,17 @@ public class AddProjectActivity extends Activity {
                 ProjectName = ProjectNameET.getText().toString();
                 if(to_year>from_year){
                     addProject();
+                    finish();
                 }
                 else if(to_year==from_year){
                     if(to_month>from_month){
                         addProject();
+                        finish();
                     }
                     else if(to_month==from_month){
                         if(to_day>from_day){
                             addProject();
+                            finish();
                         }
                         else{
                             Toast.makeText(getApplicationContext(),"프로젝트 시작 날짜와 종료 날짜를\n정확히 입력해주세요",Toast.LENGTH_LONG).show();
@@ -163,7 +166,7 @@ public class AddProjectActivity extends Activity {
                     Toast.makeText(AddProjectActivity.this, "추가할 친구 정보를 받아올 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(AddProjectActivity.this, "총 " + participants.size()+"명을 추가하셨습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddProjectActivity.this, "총 " + (participants.size()-1)+"명을 추가하셨습니다.", Toast.LENGTH_SHORT).show();
                     total_participants = participants.size();
                 }
             }

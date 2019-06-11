@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -75,6 +77,35 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration configuration){
+        super.onConfigurationChanged(configuration);
+        EMAIL= typeEMAIL.getText().toString();
+        PW = typePW.getText().toString();
+        setContentView(R.layout.activity_login);
+        typeEMAIL = findViewById(R.id.typeEMAIL);
+        typePW = findViewById(R.id.typePW);
+        typeEMAIL.setText(EMAIL);
+        typePW.setText(PW);
+        Button login= findViewById(R.id.LOGIN);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EMAIL = typeEMAIL.getText().toString();
+                PW = typePW.getText().toString();
+                signIn();
+            }
+        });
+        Button join = findViewById(R.id.JOIN);
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void signIn() {

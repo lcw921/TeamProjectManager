@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,13 +16,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class Overlap extends AppCompatActivity {
 
     public ToDo[] todos = new ToDo[100];
     TextView[] textViews = new TextView[100];
     Integer i = 0;
     RelativeLayout container;
-    String members[];
+    ArrayList<String> members;
     Integer n;
     Integer t = 0;
     private DatabaseReference mPostReference;
@@ -37,7 +40,7 @@ public class Overlap extends AppCompatActivity {
         Intent intent = getIntent();
 
         mPostReference = FirebaseDatabase.getInstance().getReference();
-        members = intent.getStringArrayExtra("MEMBER_NAME");
+        members = intent.getStringArrayListExtra("MEMBER_NAME");
         n = intent.getExtras().getInt("NUMBER_OF_MEMBER");
 
         getFirebaseDatabase();
@@ -61,10 +64,10 @@ public class Overlap extends AppCompatActivity {
                     Log.d("getFirebaseDatabase", "todos "  + todos[i].todo_id + todos[i].day +todos[i].start_time+ todos[i].end_time);
                     Log.d("getFirebaseDatabase", "key: " + key);
                     Log.d("getFirebaseDatabase", "info: " + info[0] + info[1] + info[2] + info[3]);
-                    if(get.day.toString().equals("월")){
+                    if(get.day.toString().equals("월요일")){
                         container = (RelativeLayout) findViewById(R.id.mon);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -81,10 +84,10 @@ public class Overlap extends AppCompatActivity {
                         textViews[i].setBackground(getResources().getDrawable((R.drawable.edge2)));
                         i++;
                     }
-                    else if(get.day.toString().equals("화")){
+                    else if(get.day.toString().equals("화요일")){
                         container = (RelativeLayout) findViewById(R.id.tue);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -100,10 +103,10 @@ public class Overlap extends AppCompatActivity {
                         textViews[i].setBackground(getResources().getDrawable((R.drawable.edge2)));
                         i++;
                     }
-                    else if(get.day.toString().equals("수")){
+                    else if(get.day.toString().equals("수요일")){
                         container = (RelativeLayout) findViewById(R.id.wen);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -119,10 +122,10 @@ public class Overlap extends AppCompatActivity {
                         textViews[i].setBackground(getResources().getDrawable((R.drawable.edge2)));
                         i++;
                     }
-                    else if(get.day.toString().equals("목")){
+                    else if(get.day.toString().equals("목요일")){
                         container = (RelativeLayout) findViewById(R.id.thur);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -138,10 +141,10 @@ public class Overlap extends AppCompatActivity {
                         textViews[i].setBackground(getResources().getDrawable((R.drawable.edge2)));
                         i++;
                     }
-                    else if(get.day.toString().equals("금")){
+                    else if(get.day.toString().equals("금요일")){
                         container = (RelativeLayout) findViewById(R.id.fri);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -157,10 +160,10 @@ public class Overlap extends AppCompatActivity {
                         textViews[i].setBackground(getResources().getDrawable((R.drawable.edge2)));
                         i++;
                     }
-                    else if(get.day.toString().equals("토")){
+                    else if(get.day.toString().equals("토요일")){
                         container = (RelativeLayout) findViewById(R.id.sat);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -176,10 +179,10 @@ public class Overlap extends AppCompatActivity {
                         textViews[i].setBackground(getResources().getDrawable((R.drawable.edge2)));
                         i++;
                     }
-                    else if(get.day.toString().equals("일")){
+                    else if(get.day.toString().equals("일요일")){
                         container = (RelativeLayout) findViewById(R.id.sun);
                         textViews[i] = new TextView(Overlap.this);
-                        textViews[i].setText(get.todo_id.toString());
+                        textViews[i].setText("");
                         tempheight =  Integer.parseInt(info[3])-Integer.parseInt(info[2]);
                         height = (int) ((tempheight/100 * 72 + tempheight%100 * 1.2) * scale + 0.5f);
                         tempgap = Integer.parseInt(info[2]) - 900;
@@ -205,7 +208,7 @@ public class Overlap extends AppCompatActivity {
             }
         };
         for(t = 0; t < n; t++){
-            mPostReference.child("table_list/" + members[t]).addValueEventListener(postListener);
+            mPostReference.child("/table_list/" + members.get(t)).addValueEventListener(postListener);
         }
     }
 }

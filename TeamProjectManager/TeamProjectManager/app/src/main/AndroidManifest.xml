@@ -3,9 +3,8 @@
     package="edu.skku.MAP.teamprojectmanager">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -18,16 +17,21 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD3mvr3YlSgWQpy1N-_dDlaFB7FOM9BLFA">
-        </meta-data>
-        <activity android:name=".SelectFriendActivity"></activity>
-        <activity android:name=".TimeActivity"></activity>
+            android:value="AIzaSyD3mvr3YlSgWQpy1N-_dDlaFB7FOM9BLFA"></meta-data>
+
+        <activity android:name=".SelectFriendActivity" />
+        <activity android:name=".TimeActivity" />
         <activity
             android:name=".AddProjectActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Overlap" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RoleActivity"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="sensor"></activity>
+        <activity android:name=".LoginActivity"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +39,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChatListActivity" />
-        <activity android:name=".ChatroomActivity" />
+
+        <activity android:name=".ChatroomActivity"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="sensor" ></activity>
+
         <activity android:name=".JoinActivity" />
         <activity android:name=".LocationActivity" />
     </application>

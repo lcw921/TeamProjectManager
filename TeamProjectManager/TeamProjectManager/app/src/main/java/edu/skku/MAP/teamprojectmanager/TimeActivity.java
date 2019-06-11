@@ -396,7 +396,7 @@ public class TimeActivity extends AppCompatActivity {
         check = 0;
         for(c = 0; c < i; c++){
             Log.d("getFirebaseDatabase", "todos on checking "  + todos[c].todo_id + todos[c].day +todos[c].start_time+ todos[c].end_time);
-            if(todos[c].day.toString().equals("월") && day.toString().equals("월")){
+            if(todos[c].day.toString().equals("월요일") && day.toString().equals("월요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);
@@ -417,7 +417,7 @@ public class TimeActivity extends AppCompatActivity {
                     check++;
                 }
             }
-            if(todos[c].day.toString().equals("화") && day.toString().equals("화")){
+            if(todos[c].day.toString().equals("화요일") && day.toString().equals("화요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);
@@ -438,7 +438,7 @@ public class TimeActivity extends AppCompatActivity {
                     check++;
                 }
             }
-            if(todos[c].day.toString().equals("수") && day.toString().equals("수")){
+            if(todos[c].day.toString().equals("수요일") && day.toString().equals("수요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);
@@ -459,7 +459,7 @@ public class TimeActivity extends AppCompatActivity {
                     check++;
                 }
             }
-            if(todos[c].day.toString().equals("목") && day.toString().equals("목")){
+            if(todos[c].day.toString().equals("목요일") && day.toString().equals("목요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);
@@ -480,7 +480,7 @@ public class TimeActivity extends AppCompatActivity {
                     check++;
                 }
             }
-            if(todos[c].day.toString().equals("금") && day.toString().equals("금")){
+            if(todos[c].day.toString().equals("금요일") && day.toString().equals("금요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);
@@ -501,7 +501,7 @@ public class TimeActivity extends AppCompatActivity {
                     check++;
                 }
             }
-            if(todos[c].day.toString().equals("토") && day.toString().equals("토")){
+            if(todos[c].day.toString().equals("토요일") && day.toString().equals("토요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);
@@ -522,7 +522,7 @@ public class TimeActivity extends AppCompatActivity {
                     check++;
                 }
             }
-            if(todos[c].day.toString().equals("일") && day.toString().equals("일")){
+            if(todos[c].day.toString().equals("일요일") && day.toString().equals("일요일")){
                 start_time1 = Integer.parseInt(start_time);
                 start_time2 = Integer.parseInt(todos[c].start_time);
                 end_time1 = Integer.parseInt(end_time);

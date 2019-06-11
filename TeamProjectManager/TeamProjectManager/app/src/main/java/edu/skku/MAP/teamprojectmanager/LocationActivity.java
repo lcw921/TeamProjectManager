@@ -86,6 +86,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
                     String []splitStr = addressList.get(0).toString().split(",");
                     address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2);
+
                     latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1);
                     longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1);
                     check++;

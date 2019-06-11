@@ -2,6 +2,7 @@ package edu.skku.MAP.teamprojectmanager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +60,26 @@ public class ChatListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent= new Intent(getApplicationContext(), ChatroomActivity.class);
                 intent.putExtra("roomID", chatlists.get(position).getPROJECTNAME()); // 클릭한 리스트의 번호를 전달
+                intent.putExtra("from", chatlists.get(position).getFROM()); // 클릭한 리스트의 번호를 전달
+                intent.putExtra("to", chatlists.get(position).getTO()); // 클릭한 리스트의 번호를 전달
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration configuration){
+        super.onConfigurationChanged(configuration);
+        setContentView(R.layout.activity_chatlist);
+        listView = ChatListActivity.this.findViewById(R.id.Chatlists);
+        listView.setAdapter(chatlistAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent= new Intent(getApplicationContext(), ChatroomActivity.class);
+                intent.putExtra("roomID", chatlists.get(position).getPROJECTNAME()); // 클릭한 리스트의 번호를 전달
+                intent.putExtra("from", chatlists.get(position).getFROM()); // 클릭한 리스트의 번호를 전달
+                intent.putExtra("to", chatlists.get(position).getTO()); // 클릭한 리스트의 번호를 전달
                 startActivity(intent);
             }
         });
